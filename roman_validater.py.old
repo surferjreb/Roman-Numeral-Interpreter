@@ -8,13 +8,25 @@ class RomanValidator:
         self.roman = RomanNumerals()
 
     def validate_numerals(self, user_input):
-        # Regex can be used here instead
         # check_letters = re.compile('[CDILMVX]+')
         user_numerals = []
-
+        p_letter = None
+        count = 0
         try:
             for letter in user_input:
                 if letter in self.roman.roman_numerals.keys():
+                    if p_letter is None:
+                        count = 1
+                        p_letter = letter
+                    elif letter == p_letter:
+                        count += 1
+                        p_letter = letter
+                    else:
+                        count = 1
+                        p_letter = letter
+
+                    if count > 3:
+                        raise TypeError()
                     user_numerals.append(letter)
                 else:
                     raise TypeError()
