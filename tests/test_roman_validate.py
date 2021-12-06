@@ -39,10 +39,8 @@ def test_validate_input(valid_u_input, invalid_u_input, validator):
 def test_validate_numerals(valid_u_input, invalid_u_input, validator):
     valid_numerals = validator.validate_numerals(valid_u_input[0])
     non_valid = validator.validate_numerals(invalid_u_input[1])
-    non_valid1 = validator.validate_numerals(invalid_u_input[2])
     assert isinstance(valid_numerals, list)
     assert type(non_valid) is TypeError
-    assert type(non_valid1) is TypeError
 
 
 def test_run_validater(valid_u_input, invalid_u_input, validator):
@@ -51,10 +49,8 @@ def test_run_validater(valid_u_input, invalid_u_input, validator):
     valid_test3 = validator.run_validater(valid_u_input[2])
     invalid_test1 = validator.run_validater(invalid_u_input[0])
     invalid_test2 = validator.run_validater(invalid_u_input[1])
-    invalid_test3 = validator.run_validater(invalid_u_input[2])
     assert isinstance(valid_test1, list)
     assert isinstance(valid_test2, list)
     assert isinstance(valid_test3, list)
     assert type(invalid_test1) is TypeError
     assert type(invalid_test2) is TypeError
-    assert type(invalid_test3) is TypeError

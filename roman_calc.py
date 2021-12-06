@@ -16,7 +16,8 @@ class RomanCalc:
                 total += value
 
             elif value > prev_value:
-                total = value - total
+                total -= prev_value
+                total += (value - prev_value)
 
             else:
                 total += value
