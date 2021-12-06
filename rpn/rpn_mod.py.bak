@@ -1,0 +1,58 @@
+import operator
+import re
+
+
+class RpnMod:
+    def __init__(self):
+        self._numerals = []
+        self._operators = []
+        self.check_ops = re.compile('[\+\-\*/]+')
+
+    def calculate(self, eq):
+        try:
+            self._read_equation(eq)
+            while len(self._numerals) >= 2:
+                self._numerals.append(self._run_operation())
+            
+            return self._numerals.pop()
+        except Exception as err:
+            print('Error: {}'.format(err))
+
+    def _read_equation(self, eq):
+        for value in eq:
+            if value.isdigit():
+                self._numerals.append(int(value))
+            elif self.check_ops.match(value):
+                self._operators.append(value)
+            else:
+                return TypeError
+
+    def _run_operation(self):
+        ans = None
+        op = self._operators.pop()
+        
+        if op == '+':
+            ans = operator.add(self._numerals.pop(), self._numerals.pop())
+        elif op == '-':
+            ans = operator.sub(self._numerals.pop(-2),
+                               self._numerals.pop())
+        elif op == '*':
+            ans = operator.mul(self._numerals.pop(), self._numerals.pop())
+        elif op == '/':
+            ans = operator.floordiv(self._numerals(-2),
+                                    self._numerals.pop())
+        else:
+            ans = 'not an operation'
+
+        return ans
+        
+
+# Read in list of numbers and operators.
+# Perform operations
+# Return answer
+
+""" This version of RPN_modula will I think correctly behave with the input
+that will be entered via the interface.  You can only enter so much when using
+roman numerals in matmatical equations, but for the sake of that one person who
+would try.  I think it would be best to correct the behavior to take in full
+equations and perform them as entered."""

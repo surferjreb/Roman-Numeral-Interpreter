@@ -6,6 +6,7 @@ class RomanValidator:
     def __init__(self):
         self.user_numerals = None
         self.roman = RomanNumerals()
+        self.check_ops = re.compile('[\+\-\*\\]+')
 
     def validate_numerals(self, user_input):
         # Regex can be used here instead
